@@ -7,5 +7,6 @@
  */
 
 return [
-    'parameters' => 'parametres',
+    'parameters' => "parametres",
+    'upload_picture' => "mettre en ligne une photo",
 ];
