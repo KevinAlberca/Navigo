@@ -9,4 +9,6 @@
 return [
     'parameters' => "parametres",
     'upload_picture' => "mettre en ligne une photo",
+    'picture_to_upload' => "image à mettre en ligne",
+    'submit' => "soumettre",
 ];

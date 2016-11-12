@@ -8,5 +8,7 @@
 
 return [
     'parameters' => "parameters",
-    'upload_picture' => "upload a picture"
+    'upload_picture' => "upload a picture",
+    'picture_to_upload' => "picture to upload",
+    'submit' => "submit",
 ];
