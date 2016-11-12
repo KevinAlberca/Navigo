@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/parameters', 'ParametersController@index');
+Route::post('/parameters/upload_picture', 'ParametersController@uploadPicture');
