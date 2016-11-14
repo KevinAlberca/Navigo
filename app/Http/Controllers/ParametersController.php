@@ -36,7 +36,7 @@ class ParametersController extends Controller
         if($request->isMethod('post')) {
             if($request->file('picture_to_upload')->isValid()){
                 $extension = $request->picture_to_upload->extension();
-                $request->picture_to_upload->move('uploads/profile_picture', Auth::user()->name.'.'.$extension);
+                $request->picture_to_upload->move('uploads/profile_picture', Auth::user()->firstname.'.'.Auth::user()->lastname.'.'.$extension);
                 return redirect()->action('ParametersController@index');
             } else {
                 throw new \Error( trans('errors.file_corrupted') );
