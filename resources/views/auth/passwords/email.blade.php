@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('title')
-    Reset password
+    {{ ucwords(trans('auth.reset_password')) }}
 @endsection
 
 <!-- Main Content -->
 @section('content')
     <div class="panel panel-default">
-        <div class="panel-heading">Reset Password</div>
+        <div class="panel-heading">{{ ucwords(trans('auth.reset_password')) }}</div>
         <div class="panel-body">
             @if (session('status'))
                 <div class="alert alert-success">
@@ -19,7 +19,7 @@
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                    <label for="email" class="col-md-4 control-label">{{ ucwords(trans('auth.email_adress')) }}</label>
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            Send Password Reset Link
+                            {{ ucwords(trans('auth.send_reset_link'))}}
                         </button>
                     </div>
                 </div>
