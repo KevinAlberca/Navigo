@@ -51,6 +51,10 @@ class PrintController extends Controller
         $dst_y = $navigo_card_infos[1] - 180;
 
         imagecopyresized($navigo_card, $profile_picture, $dst_x, $dst_y, 0, 0, 167, 167, 300, 300);
+        $black = imagecolorallocate($navigo_card, 0, 0, 0);
+
+        imagettftext($navigo_card , 30, 0, 35, ($navigo_card_infos[0] + 60), $black, 'fonts/BabelSans.ttf', ucfirst(Auth::user()->firstname)); // Set firstname
+        imagettftext($navigo_card , 30, 0, 35, ($navigo_card_infos[0] + 105), $black, 'fonts/BabelSans.ttf', strtoupper(Auth::user()->lastname)); // Set lastname
 
         imagepng($navigo_card);
 
