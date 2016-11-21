@@ -7,9 +7,3 @@
     </div>
     <input type="submit" value="{{ ucfirst(trans('parameters.submit'))}}" class="btn btn-primary" />
 </form>
-
-<script type="text/javascript">
-    setInterval(function(){
-        console.log(document.getElementById('picture_to_upload').placeholder)
-    }, 1000);
-</script>
