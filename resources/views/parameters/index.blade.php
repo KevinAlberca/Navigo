@@ -12,5 +12,6 @@
                         @include('parameters.upload_pictures')
                     </div>
                 </div>
+                <img src="/print/navigo_card" alt="{{ ucfirst(trans('navigo.your_card')) }}">
             </div>
 @endsection

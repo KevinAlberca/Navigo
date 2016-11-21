@@ -21,3 +21,6 @@ Auth::routes();
 
 Route::get('/parameters', 'ParametersController@index');
 Route::post('/parameters/upload_picture', 'ParametersController@uploadPicture');
+
+
+Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
