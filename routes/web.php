@@ -11,19 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/parameters', 'ParametersController@index');
 Route::post('/parameters/upload_picture', 'ParametersController@uploadPicture');
-
 Route::get('/card', 'CardsController@getCardInformations');
-
 Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
 
-Route::get('/admin', 'AdminController@index', ['middleware' => ['auth', 'admin']] );
+
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@index');
+});
