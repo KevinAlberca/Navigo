@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -18,5 +19,12 @@ class AdminController extends Controller
 
     public function index() {
         return view('admin.index');
+    }
+
+    public function getCards() {
+        $cards = DB::table('cards')->paginate(25);
+        return view('admin.cards.index', [
+            'cards' => $cards,
+        ]);
     }
 }
