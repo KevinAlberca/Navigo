@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>@yield('title') | Administration {{ config('app.name', 'Laravel') }}</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/sb-admin.css" rel="stylesheet">
     <link href="/css/plugins/morris.css" rel="stylesheet">
@@ -32,7 +32,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->firstname.' '.Auth::user()->lastname}}  <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
