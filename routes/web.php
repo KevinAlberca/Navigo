@@ -25,4 +25,6 @@ Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
+    Route::get('/cards', 'AdminController@getCards');
+    Route::post('/cards/search', 'AdminController@searchForCards');
 });
