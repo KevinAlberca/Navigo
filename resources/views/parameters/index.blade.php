@@ -17,7 +17,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="change_password">
-                            @include('parameters.change_email')
+                            @include('parameters.change_password')
                         </div>
                         <div role="tabpanel" class="tab-pane" id="change_email">
                             messages
