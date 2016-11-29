@@ -75,7 +75,7 @@ class PaypalController extends Controller
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
-        return redirect()->url('/home');
+        return redirect()->route('homepage');
 	}
 
 	public function getCancel() {
