@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ParametersController extends Controller
 {
@@ -47,6 +49,25 @@ class ParametersController extends Controller
     }
 
     public function changePassword(Request $request) {
-        return "It's work !";
+        $old_password = $request->input('old_password');
+        $new_password = $request->input('new_password');
+        $new_password_conf = $request->input('new_password_conf');
+        if ($new_password !== $new_password_conf) {
+            throw new \Error('New password and Confirmation must be the same');
+        }
+
+        if(password_hash($old_password, PASSWORD_BCRYPT) == Auth::user()->password) {
+            throw new \Error('Old password isn\'t the same as input value');
+        }
+
+        $res = DB::table('users')
+            ->where('id', '=', Auth::user()->id)
+            ->update([
+                'password' => password_hash($new_password, PASSWORD_BCRYPT)
+            ]);
+
+        if($res) {
+            return redirect()->action('ParametersController@index');
+        }
     }
 }
