@@ -67,7 +67,6 @@ class PaypalController extends Controller
 	    $id = $request->get('paymentId');
 	    $token = $request->get('token');
 	    $payer_id = $request->get('PayerID');
-        var_dump($id, $payer_id);
 
 	    $payment = PayPal::getById($id, $this->_apiContext);
 
@@ -88,7 +87,7 @@ class PaypalController extends Controller
         return DB::table('billing')->insert([
             'payment_id' => $payment_id,
             'users_id' => Auth::user()->id,
-            'cards_id' => 0
+            'cards_id' => 0,
             'payment_mode' => 'paypal',
             'made_at' => date('Y-m-d H:i:s'),
         ]);
