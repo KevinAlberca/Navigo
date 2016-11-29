@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPaymentId extends Migration
+class RenameBillingToBill extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class AddPaymentId extends Migration
      */
     public function up()
     {
-        Schema::table('billing', function (Blueprint $table) {
-            $table->string('payment_id')->after('id');
-        });
+        Schema::rename('billing', 'bill');
     }
 
     /**
@@ -25,8 +23,6 @@ class AddPaymentId extends Migration
      */
     public function down()
     {
-        Schema::table('billing', function (Blueprint $table) {
-            $table->dropColumn('payment_id');
-        });
+        Schema::rename('bill', 'billing');
     }
 }
