@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
-    public function __construct() {
-        $this->middleware('auth');
-    }
-
     public function getPlanList() {
         $plans = DB::table('plans')->get();
         return view('subscription.plans', [
