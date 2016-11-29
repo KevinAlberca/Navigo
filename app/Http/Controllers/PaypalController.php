@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 use Paypal;
 
 class PaypalController extends Controller
@@ -28,7 +29,10 @@ class PaypalController extends Controller
     }
 
     public function payPremium() {
-    	return view('subscription.plans');
+        $plans = DB::table('plans')->get();
+    	return view('subscription.plans', [
+            'plans' => $plans,
+        ]);
     }
 
     public function getCheckout(Request $request) {
@@ -41,7 +45,7 @@ class PaypalController extends Controller
 
 	    $transaction = PayPal::Transaction();
 	    $transaction->setAmount($amount);
-	    $transaction->setDescription('Buy Premium '.$request->input('type').' Plan on '.$request->input('pay'));
+	    $transaction->setDescription('Buy a subscription for a '.$request->input('duration')."\n".'It\'s cost '.$request->input('pay').' euros');
 
 	    $redirectUrls = PayPal:: RedirectUrls();
 	    $redirectUrls->setReturnUrl(route('getDone'));
@@ -71,8 +75,7 @@ class PaypalController extends Controller
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
-
-	    print_r($executePayment);
+        return redirect()->url('/home');
 	}
 
 	public function getCancel() {

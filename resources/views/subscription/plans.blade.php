@@ -1,25 +1,30 @@
 @extends('layouts.app')
 @section('content')
-    <form method="POST" action="{{ url('/subscription/getCheckout') }}">
-        {{ csrf_field() }}
-        <input type="hidden" name="type" id="type" value="small" required />
-        <input type="hidden" name="pay" id="pay" value="30" required />
-	    <div class="db-pricing-eleven db-bk-color-one">
-	        <div class="price">
-	            <sup>$</sup>30
-                <small>per quarter</small>
-            </div>
-            <div class="type">
-                SMALL PLAN
-            </div>
-            <ul>
-                <li><i class="glyphicon glyphicon-print"></i>30+ Accounts </li>
-                <li><i class="glyphicon glyphicon-time"></i>150+ Projects </li>
-                <li><i class="glyphicon glyphicon-trash"></i>Lead Required</li>
-            </ul>
-            <div class="pricing-footer">
-                <button class="btn db-button-color-square btn-lg">BOOK ORDER</button>
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ ucfirst(trans('parameters.parameters')) }}</div>
+        <div class="panel-body">
+            <div class="col-xs-12">
+                @foreach($plans as $plan)
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">{{ $plan->name }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                {{ $plan->id }}
+                                {{ $plan->description }}
+                                {{ $plan->target }}
+                                {{ $plan->price }} for {{ $plan->duration }}
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#buyModal{{ $plan->id }}">
+                                  Buy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @include('subscription.modal_plan')
+                @endforeach
             </div>
         </div>
-    </form>
+    </div>
 @endsection
