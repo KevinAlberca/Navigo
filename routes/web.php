@@ -22,6 +22,12 @@ Route::post('/parameters/upload_picture', 'ParametersController@uploadPicture');
 Route::get('/card', 'CardsController@getCardInformations');
 Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
 
+Route::group(['middleware' => ['web'], 'prefix' => 'subscription'], function () {
+    Route::post('getCheckout', ['as'=>'getCheckout','uses'=>'PaypalController@getCheckout']);
+    Route::get('getDone', ['as'=>'getDone','uses'=>'PaypalController@getDone']);
+    Route::get('getCancel', ['as'=>'getCancel','uses'=>'PaypalController@getCancel']);
+});
+
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
