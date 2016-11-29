@@ -30,6 +30,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'subscription'], function ()
     Route::get('cancel', ['as'=>'cancel','uses'=>'SubscriptionController@getCancel']);
 });
 
+Route::group(['middleware' => ['web'], 'prefix' => 'billing'], function () {
+    Route::get('/', 'BillController@getAllBillingForUser');
+});
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
