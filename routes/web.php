@@ -23,6 +23,7 @@ Route::get('/card', 'CardsController@getCardInformations');
 Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
 
 Route::group(['middleware' => ['web'], 'prefix' => 'subscription'], function () {
+    Route::get('/', ['as'=>'payPremium','uses'=>'PaypalController@payPremium']);
     Route::post('getCheckout', ['as'=>'getCheckout','uses'=>'PaypalController@getCheckout']);
     Route::get('getDone', ['as'=>'getDone','uses'=>'PaypalController@getDone']);
     Route::get('getCancel', ['as'=>'getCancel','uses'=>'PaypalController@getCancel']);
