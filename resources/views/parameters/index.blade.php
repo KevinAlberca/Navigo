@@ -20,7 +20,7 @@
                             @include('parameters.change_password')
                         </div>
                         <div role="tabpanel" class="tab-pane" id="change_email">
-                            messages
+                            @include('parameters.change_email')
                         </div>
                         <div role="tabpanel" class="tab-pane" id="profile_picture">
                             <div class="col-xs-12 col-sm-6">

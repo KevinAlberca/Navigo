@@ -70,4 +70,24 @@ class ParametersController extends Controller
             return redirect()->action('ParametersController@index');
         }
     }
+
+    public function changeEmailAdress(Request $request) {
+        $old_email = $request->input('old_email');
+        $new_email = $request->input('new_email');
+        $new_email_conf = $request->input('new_email_conf');
+        if ($new_email !== $new_email_conf) {
+            throw new \Error('New email and Confirmation must be the same');
+        }
+
+        if($old_email == Auth::user()->email) {
+            $res = DB::table('users')
+                ->where('id', '=', Auth::user()->id)
+                ->update([
+                    'email' => $new_email
+                ]);
+            return redirect()->action('ParametersController@index');
+        } else {
+            throw new \Error('The input value for old_email isn\'t the same in database');
+        }
+    }
 }
