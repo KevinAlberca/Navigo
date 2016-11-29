@@ -1,1 +1,0 @@
-http://itsolutionstuff.com/post/laravel-5-paypal-payment-integration-example-using-netshell-paypal-package-from-scratchexample.html
