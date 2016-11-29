@@ -16,7 +16,7 @@ class SubscriptionController extends Controller
     }
 
     public function registerUserSubscription($payment_id, $payer_id) {
-        return DB::table('billing')->insert([
+        return DB::table('bill')->insert([
             'payment_id' => $payment_id,
             'users_id' => Auth::user()->id,
             'cards_id' => 0,
