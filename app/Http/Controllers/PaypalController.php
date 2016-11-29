@@ -67,6 +67,7 @@ class PaypalController extends Controller
 	    $id = $request->get('paymentId');
 	    $token = $request->get('token');
 	    $payer_id = $request->get('PayerID');
+        var_dump($id, $payer_id);
 
 	    $payment = PayPal::getById($id, $this->_apiContext);
 
@@ -75,10 +76,21 @@ class PaypalController extends Controller
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
+        $this->_userSubscribed($id, $payer_id);
         return redirect()->route('homepage');
 	}
 
 	public function getCancel() {
 	    return redirect()->route('payPremium');
 	}
+
+    private function _userSubscribed($payment_id, $payer_id) {
+        return DB::table('billing')->insert([
+            'payment_id' => $payment_id,
+            'users_id' => Auth::user()->id,
+            'cards_id' => 0
+            'payment_mode' => 'paypal',
+            'made_at' => date('Y-m-d H:i:s'),
+        ]);
+    }
 }
