@@ -16,35 +16,41 @@ class PrintController extends Controller
 {
     protected function getNavigoCard() {
         $pp = $this->_getProfilePicture();
-        if(file_exists('uploads/profile_picture/'.$pp)) {
-            return $this->_printNavigoCard('uploads/profile_picture/'.$pp);
+        if(file_exists('uploads/profile_picture/'.$pp['filename'])) {
+            return $this->_printNavigoCard('uploads/profile_picture/'.$pp['filename'], $pp['extension']);
         } else {
-            echo 'File does not exists';
+            return $this->_printNavigoCard('uploads/profile_picture/default.png', 'png');
         }
-        return true;
     }
 
     private function _getProfilePicture() {
         $full_name = strtolower(Auth::user()->firstname.".".Auth::user()->lastname);
         $scan = scandir('uploads/profile_picture');
         $file_name;
+        $ext;
         foreach ($scan as $pp) {
             if($pp == $full_name.".png") {
                 $file_name = $full_name.".png";
+                $ext = '.png';
             } elseif($pp == $full_name.".jpg") {
                 $file_name = $full_name.".jpg";
-            } else {
-                $file_name = false;
+                $ext = '.jpg';
+            } elseif($pp == $full_name.".jpeg") {
+                $file_name = $full_name.".jpeg";
+                $ext = '.jpeg';
             }
         }
-        return $file_name;
+        return [
+            'filename' => $file_name,
+            'extension' => $ext,
+        ];
     }
 
-    public function _printNavigoCard($file_path) {
-        header ("Content-type: image/png"); // L'image que l'on va créer est un jpeg
+    public function _printNavigoCard($file_path, $ext) {
+        header ("Content-type: image/jpeg"); // L'image que l'on va créer est un jpeg
 
         $navigo_card = imagecreatefrompng('img/navigo.png'); // Le logo est la source
-        $profile_picture = imagecreatefrompng($file_path);  // La photo est la destination
+        $profile_picture =  $ext == '.png' ? imagecreatefrompng($file_path) : imagecreatefromjpeg($file_path);
         $navigo_card_infos = getimagesize('img/navigo.png');
 
         $dst_x = $navigo_card_infos[0] - 255;

@@ -23,7 +23,7 @@ class ParametersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public static function index() {
         return view('parameters.index');
     }
 
@@ -36,7 +36,7 @@ class ParametersController extends Controller
         if($request->isMethod('post')) {
             if($request->file('picture_to_upload')->isValid()){
                 $extension = $request->picture_to_upload->extension();
-                $request->picture_to_upload->move('uploads/profile_picture', Auth::user()->firstname.'.'.Auth::user()->lastname.'.'.$extension);
+                $request->picture_to_upload->move('uploads/profile_picture', strtolower(Auth::user()->firstname).'.'.strtolower(Auth::user()->lastname).'.'.$extension);
                 return redirect()->action('ParametersController@index');
             } else {
                 throw new \Error( trans('errors.file_corrupted') );
