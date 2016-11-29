@@ -17,8 +17,13 @@ Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
-Route::get('/parameters', 'ParametersController@index');
-Route::post('/parameters/upload_picture', 'ParametersController@uploadPicture');
+Route::group(['middleware' => 'auth', 'prefix' => 'parameters'], function() {
+    Route::get('/', 'ParametersController@index');
+    Route::post('/upload_picture', 'ParametersController@uploadPicture');
+    Route::post('/change_password', 'ParametersController@changePassword');
+
+});
+
 Route::get('/card', 'CardsController@getCardInformations');
 Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
 

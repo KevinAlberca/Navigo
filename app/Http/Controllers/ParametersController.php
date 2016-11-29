@@ -45,4 +45,8 @@ class ParametersController extends Controller
             throw new \Error( trans('errors.method_post') );
         }
     }
+
+    public function changePassword(Request $request) {
+        return "It's work !";
+    }
 }
