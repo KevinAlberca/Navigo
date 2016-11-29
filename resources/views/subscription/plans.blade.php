@@ -21,7 +21,6 @@
                             </div>
                         </div>
                     </div>
-
                     @include('subscription.modal_plan')
                 @endforeach
             </div>

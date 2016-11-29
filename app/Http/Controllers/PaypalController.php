@@ -12,6 +12,7 @@ class PaypalController extends Controller
 {
 
     private $_apiContext;
+    private $_subscription;
 
     public function __construct() {
         $this->_apiContext = PayPal::ApiContext(
@@ -27,13 +28,8 @@ class PaypalController extends Controller
             'log.LogLevel' => 'FINE'
         ));
 
-    }
+        $this->_subscription = new SubscriptionController();
 
-    public function payPremium() {
-        $plans = DB::table('plans')->get();
-    	return view('subscription.plans', [
-            'plans' => $plans,
-        ]);
     }
 
     public function getCheckout(Request $request) {
@@ -49,8 +45,8 @@ class PaypalController extends Controller
 	    $transaction->setDescription('Buy a subscription for a '.$request->input('duration')."\n".'It\'s cost '.$request->input('pay').' euros');
 
 	    $redirectUrls = PayPal:: RedirectUrls();
-	    $redirectUrls->setReturnUrl(route('getDone'));
-	    $redirectUrls->setCancelUrl(route('getCancel'));
+	    $redirectUrls->setReturnUrl(route('done'));
+	    $redirectUrls->setCancelUrl(route('cancel'));
 
 	    $payment = PayPal::Payment();
 	    $payment->setIntent('sale');
@@ -76,21 +72,11 @@ class PaypalController extends Controller
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
-        $this->_userSubscribed($id, $payer_id);
+        $this->_subscription->registerUserSubscription($id, $payer_id);
         return redirect()->route('homepage');
 	}
 
 	public function getCancel() {
-	    return redirect()->route('payPremium');
+	    return redirect()->route('/');
 	}
-
-    private function _userSubscribed($payment_id, $payer_id) {
-        return DB::table('billing')->insert([
-            'payment_id' => $payment_id,
-            'users_id' => Auth::user()->id,
-            'cards_id' => 0,
-            'payment_mode' => 'paypal',
-            'made_at' => date('Y-m-d H:i:s'),
-        ]);
-    }
 }

@@ -10,7 +10,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <form method="POST" action="{{ url('/subscription/getCheckout') }}">
+                <form method="POST" action="{{ url('/subscription/checkout') }}">
                     {{ csrf_field() }}
                     <input type="hidden" name="pay" id="pay" value="{{ $plan->price}}" required />
                     <input type="hidden" name="duration" id="duration" value="{{ $plan->duration}}" required />
