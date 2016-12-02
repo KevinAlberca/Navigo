@@ -20,8 +20,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth', 'prefix' => 'parameters'], function() {
     Route::get('/', 'ParametersController@index');
     Route::post('/upload_picture', 'ParametersController@uploadPicture');
-    Route::post('/change_password', 'ParametersController@changePassword');
-    Route::post('/change_email', 'ParametersController@changeEmailAdress');
+    Route::put('/change_password', 'ParametersController@changePassword');
+    Route::put('/change_email', 'ParametersController@changeEmailAdress');
 });
 
 Route::get('/card', 'CardsController@getCardInformations');

@@ -1,5 +1,6 @@
 <form method="POST" action="{{ url('/parameters/change_email') }}">
     {{ csrf_field() }}
+    {{ method_field('PUT') }}
     <div class="input-group">
         <label for="old_email">Old email :</label><input type="email" name="old_email" id="old_email" class="form-control" required />
     </div>
