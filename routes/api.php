@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['domain' => '{api}.navigo.dev', 'namespace' => 'API'], function () {
-
-    Route::get('/', function() {
-        return "Hello API !";
-    });
-
+Route::group(['domain' => 'api.navigo.dev', 'namespace' => 'API'], function () {
+    Route::post('/cards/check', 'CardsController@checkCard');
 });
