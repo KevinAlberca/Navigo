@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::group(['domain' => '{api}.navigo.dev', 'namespace' => 'API'], function () {
+
+    Route::get('/', function() {
+        return "Hello API !";
+    });
+
+});
