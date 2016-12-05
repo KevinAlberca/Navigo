@@ -37,7 +37,12 @@ return [
 
     'paypal' => [
         'client_id' => 'paypal_client_id',
-        'secret' => 'paypal_secret'
+        'secret' => 'paypal_secret',
     ],
+
+    'encrypt' => [
+        'key' => 'mySecretKey',
+        'iv' => 'mySecretIv',
+    ]
 
 ];
