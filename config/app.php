@@ -229,6 +229,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Paypal' => Netshell\Paypal\Facades\Paypal::class,
+
+        'Security' => App\Http\Controllers\SecurityController::class,
     ],
 
 ];

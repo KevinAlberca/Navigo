@@ -62,7 +62,10 @@ class PaypalController extends Controller
 	public function getDone(Request $request) {
 	    $id = $request->get('paymentId');
 	    $token = $request->get('token');
-	    $payer_id = $request->get('PayerID');
+        $payer_id = $request->get('PayerID');
+	    $card_id = $request->get('card_id');
+        $plan_id = $request->get('plan_id');
+        $card_id = SecurityController::encrypt('decrypt', $card_id);
 
 	    $payment = PayPal::getById($id, $this->_apiContext);
 
@@ -71,7 +74,7 @@ class PaypalController extends Controller
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
-        $this->_subscription->registerUserSubscription($id, $payer_id);
+        $this->_subscription->registerUserSubscription($id, $payer_id, $card_id, $plan_id);
         return redirect()->route('homepage');
 	}
 

@@ -14,6 +14,10 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="pay" id="pay" value="{{ $plan->price}}" required />
                     <input type="hidden" name="duration" id="duration" value="{{ $plan->duration}}" required />
+                    @if($card_id)
+                        <input type="hidden" name="card_id" id="card_id" value="{{ $card_id }}" required />
+                        <input type="hidden" name="plan_id" id="plan_id" value="{{ $plan->id }}" required />
+                    @endif
                     <button type="submit" class="btn btn-primary">Buy</button>
                 </form>
             </div>

@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'parameters'], function() {
     Route::put('/change_email', 'ParametersController@changeEmailAdress');
 });
 
+Route::get('/renew/{card_id}', 'SubscriptionController@renewCardWithId');
 Route::get('/card', 'CardsController@getCardInformations');
 Route::get('/print/navigo_card', 'PrintController@getNavigoCard');
 

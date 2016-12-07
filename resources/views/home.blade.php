@@ -18,7 +18,12 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
-                    home
+                    @foreach($card as $c)
+                        Subscribed at : {{ $c->subscription_start }}<br/>
+                        End of the subscription : {{ $c->subscription_end }}<br/>
+                        IS active ? {{ $c->is_active }}<br/>
+                        <a href="/renew/{{ Security::encrypt('encrypt', $c->id) }}" class="btn btn-primary">Renew</a>
+                    @endforeach
                 </div>
                 <div role="tabpanel" class="tab-pane" id="profile">
                     profile
