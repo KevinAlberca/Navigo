@@ -36,7 +36,7 @@ class PaypalController extends Controller
     	   $payer = PayPal::Payer();
 	    $payer->setPaymentMethod('paypal');
 
-	    $amount = PayPal:: Amount();
+	    $amount = PayPal::Amount();
 	    $amount->setCurrency('EUR');
 	    $amount->setTotal($request->input('pay'));
 
@@ -44,7 +44,7 @@ class PaypalController extends Controller
 	    $transaction->setAmount($amount);
 	    $transaction->setDescription('Buy a subscription for a '.$request->input('duration')."\n".'It\'s cost '.$request->input('pay').' euros');
 
-	    $redirectUrls = PayPal:: RedirectUrls();
+	    $redirectUrls = PayPal::RedirectUrls();
 	    $redirectUrls->setReturnUrl(route('done', [
 	    "plan_id" => $plan_id,
 	    "card_id" => $card_id,
