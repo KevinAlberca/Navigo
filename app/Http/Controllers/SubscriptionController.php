@@ -35,7 +35,9 @@ class SubscriptionController extends Controller
 
     private function _createCard($user_id, $plan_id) {
         $card_id = CardsController::generateCardId();
-        $duration = DB::table('cards');
+        $duration = DB::table('cards')->where('id', '=', $plan_id)->get();
+var_dump($plan_id);
+var_dump('Duration : ', $duration);
 
         DB::table('cards')->insert([
             'id' => $card_id,

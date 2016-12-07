@@ -24,12 +24,12 @@ class CardsController extends Controller
         for($i=0; $i < 13; $i++){
             $id .= $character[rand(0, strlen($character)-1)];
         }
-//        $db_ids = DB::table('cards')->select('id')->distinct()->get();
-//        var_dump($db_ids);
-//        if(!in_array($id, $db_ids)){
-            return $id;
-//        } else {
-//            return self::generateCardId();
-//        }
+        $db_ids = DB::table('cards')->select('id')->distinct()->get();
+
+        if(!in_array($id, $db_ids->toArray())){
+	  return $id;
+        } else {
+            return self::generateCardId();
+        }
     }
 }
