@@ -35,15 +35,17 @@ class SubscriptionController extends Controller
 
     private function _createCard($user_id, $plan_id) {
         $card_id = CardsController::generateCardId();
-        $duration = DB::table('cards')->where('id', '=', $plan_id)->get();
-var_dump($plan_id);
-var_dump('Duration : ', $duration);
+        $plans = DB::table('plans')->where('id', '=', $plan_id)->get();
+
+	$today = new \DateTime();
+	$end = new \DateTime();
+	$end->modify('+1 '.$plans[0]->duration);
 
         DB::table('cards')->insert([
             'id' => $card_id,
             'users_id' => $user_id,
-            'subscription_start' => date('Y-m-d H:i:s'),
-            'subscription_end' => '',
+            'subscription_start' => $today->format('Y-m-d H:i:s'),
+            'subscription_end' => $end->format('Y-m-d H:i:s'),
             'is_active' => true,
         ]);
 
