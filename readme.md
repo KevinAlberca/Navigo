@@ -38,3 +38,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## Navigo
+### Cron task.
+To made it easier to update cards table, in database, we made a cron task running every day at midnight.
+On your serveur run this command : ``crontab -e`` and write the follow line :
+``00 00 * * * php /path/to/artisan cards:update``
