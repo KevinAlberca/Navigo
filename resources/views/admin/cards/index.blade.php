@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <h1 class="text-center">Cards</h1>
         @include('admin.cards.search')
-        <table class="table">
+        <table class="table" id="cards_list">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -26,8 +26,7 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ $cards->firstItem() }}">1</a> - <a href="{{ $cards->previousPageUrl() }}">Previous</a> - <a href="{{ $cards->nextPageUrl() }}">Next</a> - <a href="{{ url('/admin/cards?page='.$cards->lastPage()) }}"> {{ $cards->lastPage() }}</a>
+         <a href="{{ $cards->firstItem() }}">1</a> - <a href="{{ $cards->previousPageUrl() }}">Previous</a> - <a href="{{ $cards->nextPageUrl() }}">Next</a> - <a href="{{ url('/admin/cards?page='.$cards->lastPage()) }}"> {{ $cards->lastPage() }}</a>
     </div>
     <!-- /.container-fluid -->
-
 @endsection

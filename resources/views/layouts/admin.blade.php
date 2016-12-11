@@ -12,6 +12,7 @@
     <link href="/css/sb-admin.css" rel="stylesheet">
     <link href="/css/plugins/morris.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    @yield('css')
 </head>
 
 <body>
@@ -57,6 +58,17 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
+                        <a href="#" data-toggle="collapse" data-target="#demo"><i class="fa fa-id-card-o"></i> Cards <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="{{ url('/admin/cards') }}">Liste</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/cards/verify') }}">Verifier avec un numero</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="#" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
@@ -77,6 +89,9 @@
         </div>
         <!-- /#page-wrapper -->
 
+        {{-- <div style="position:fixed; padding:10px 15px; bottom:0; width:100%;background-color:deepskyblue;z-index:1000;margin:20px 0 0 0;">
+            This page took {{ (microtime(true) - LARAVEL_START) }} seconds to render
+        </div> --}}
     </div>
     <!-- /#wrapper -->
 
@@ -86,5 +101,6 @@
     <script src="/js/plugins/morris/raphael.min.js"></script>
     <script src="/js/plugins/morris/morris.min.js"></script>
     <script src="/js/plugins/morris/morris-data.js"></script>
+    @yield('js')
 </body>
 </html>

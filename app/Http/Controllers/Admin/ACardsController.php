@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\Cards;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,11 +23,35 @@ class ACardsController extends Controller
     }
 
     public function getCards() {
-        $cards = DB::table('cards')->paginate(25);
+        $cards = DB::table('cards')
+            ->orderBy('id')
+            ->paginate(50);
 
         return view('admin.cards.index', [
             'cards' => $cards,
         ]);
+    }
+
+    public function verifyWithId(Request $request) {
+        if($request->isMethod('post')) {
+
+            $card_id = $request->get('card_id');
+            $card = DB::table('cards')->where('id', '=', $card_id)->get();
+            $res = [
+                'card_id' => $card[0],
+                'message' => 'Message !'
+            ];
+            if($card[0] != null){
+                return response()->json($res);
+            } else {
+                return response()->json([
+                   'Card not recognized'
+                ]);
+            }
+
+        }
+
+        return view('admin.cards.verify');
     }
 
     /**
@@ -38,16 +61,13 @@ class ACardsController extends Controller
      */
     public function searchForCards(Request $request) {
         if($request->isMethod('post')) {
-            //N330023456785
             $value = $request->input('look_for');
-            $cards = DB::table('cards')
-                ->where('id', 'like', '%'.$value.'%')
-                ->orWhere('users_id', 'like', '%'.$value.'%')
-                ->orWhere('is_active', 'like', '%'.$value.'%')
+            $result = DB::table('cards')
+                ->where('id', 'like', $value.'%')
                 ->get();
 
             return view('admin.cards.list', [
-                'result' => $cards,
+                'result' => $result,
                 'searched_value' => $value,
             ]);
         } else {

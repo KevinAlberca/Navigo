@@ -3,7 +3,7 @@
 @section('body')
     <div class="container-fluid">
         <h1 class="text-center">You looked for : {{ $searched_value }}</h1>
-        <table class="table">
+        <table class="table table-striped table-bordered dataTable no-footer">
             <thead>
             <tr>
                 <th>ID</th>
@@ -27,5 +27,4 @@
         </table>
     </div>
     <!-- /.container-fluid -->
-
 @endsection
