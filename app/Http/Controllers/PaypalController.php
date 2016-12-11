@@ -27,15 +27,16 @@ class PaypalController extends Controller
             'log.LogLevel' => 'FINE'
         ));
 
-        $this->_subscription = new SubscriptionController();
-
+	$this->_subscription = new SubscriptionController();
     }
 
     public function getCheckout(Request $request) {
-	    $payer = PayPal::Payer();
+    	   $plan_id = $request->input('plan_id');
+	   $card_id = $request->input('card_id');
+    	   $payer = PayPal::Payer();
 	    $payer->setPaymentMethod('paypal');
 
-	    $amount = PayPal:: Amount();
+	    $amount = PayPal::Amount();
 	    $amount->setCurrency('EUR');
 	    $amount->setTotal($request->input('pay'));
 
@@ -43,8 +44,11 @@ class PaypalController extends Controller
 	    $transaction->setAmount($amount);
 	    $transaction->setDescription('Buy a subscription for a '.$request->input('duration')."\n".'It\'s cost '.$request->input('pay').' euros');
 
-	    $redirectUrls = PayPal:: RedirectUrls();
-	    $redirectUrls->setReturnUrl(route('done'));
+	    $redirectUrls = PayPal::RedirectUrls();
+	    $redirectUrls->setReturnUrl(route('done', [
+	    "plan_id" => $plan_id,
+	    "card_id" => $card_id,
+	    ]));
 	    $redirectUrls->setCancelUrl(route('cancel'));
 
 	    $payment = PayPal::Payment();
@@ -59,13 +63,14 @@ class PaypalController extends Controller
 	    return redirect()->to( $redirectUrl );
 	}
 
+
 	public function getDone(Request $request) {
 	    $id = $request->get('paymentId');
 	    $token = $request->get('token');
-        $payer_id = $request->get('PayerID');
+            $payer_id = $request->get('PayerID');
 	    $card_id = $request->get('card_id');
-        $plan_id = $request->get('plan_id');
-        $card_id = SecurityController::encrypt('decrypt', $card_id);
+            $plan_id = $request->get('plan_id');
+            $card_id = SecurityController::encrypt('decrypt', $card_id);
 
 	    $payment = PayPal::getById($id, $this->_apiContext);
 
@@ -74,8 +79,8 @@ class PaypalController extends Controller
 	    $paymentExecution->setPayerId($payer_id);
 	    $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
-        $this->_subscription->registerUserSubscription($id, $payer_id, $card_id, $plan_id);
-        return redirect()->route('homepage');
+	    $this->_subscription->registerUserSubscription($id, $plan_id, $card_id);
+	    return redirect()->route('homepage');
 	}
 
 	public function getCancel() {
