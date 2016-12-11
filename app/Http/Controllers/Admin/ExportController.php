@@ -25,14 +25,18 @@ class ExportController extends Controller
 
     public function export($data = null) {
         if($data == null) { return redirect('/admin/export'); }
-        $data_to_export = DB::table($data)->get();
+        if($data != 'cards' && $data != 'users') { die('Must be cards or users'); }
 
-        $this->_exportFile($data_to_export);
-        return redirect('/admin/export/succes');
+        if($this->_exportFile($data)) {
+            return redirect('/admin/export/succes');
+        } else {
+            throw new \Error('Error when export file');
+        }
     }
 
-    private function _exportFile($data_to_export) {
-        Excel::create('Filename', function ($excel) {
+    private function _exportFile($name_of_entity) {
+        $entity = $name_of_entity == 'users' ? \App\Model\User : '\App\Model\Cards';
+        Excel::create('Filename', function ($excel) use ($entity){
             // Set the title
             $excel->setTitle('Our new awesome title');
 
@@ -42,9 +46,8 @@ class ExportController extends Controller
 
             // Call them separately
             $excel->setDescription('A demonstration to change the file properties');
-
-            $excel->sheet('Sheetname', function($sheet) {
-                $sheet->fromModel(\App\Model\User::all());
+            $excel->sheet('Sheetname', function($sheet) use ($entity) {
+                $sheet->fromModel($entity::all());
             });
 
         })->download('csv');
