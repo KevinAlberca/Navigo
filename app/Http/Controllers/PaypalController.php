@@ -32,9 +32,9 @@ class PaypalController extends Controller
 
     public function getCheckout(Request $request) {
     	   $plan_id = $request->input('plan_id');
-	   $card_id = $request->input('card_id');
+           $card_id = $request->input('card_id');
     	   $payer = PayPal::Payer();
-	    $payer->setPaymentMethod('paypal');
+        $payer->setPaymentMethod('paypal');
 
 	    $amount = PayPal::Amount();
 	    $amount->setCurrency('EUR');
@@ -67,10 +67,10 @@ class PaypalController extends Controller
 	public function getDone(Request $request) {
 	    $id = $request->get('paymentId');
 	    $token = $request->get('token');
-            $payer_id = $request->get('PayerID');
+        $payer_id = $request->get('PayerID');
 	    $card_id = $request->get('card_id');
-            $plan_id = $request->get('plan_id');
-            $card_id = SecurityController::encrypt('decrypt', $card_id);
+        $plan_id = $request->get('plan_id');
+        $card_id = SecurityController::encrypt('decrypt', $card_id);
 
 	    $payment = PayPal::getById($id, $this->_apiContext);
 

@@ -1,4 +1,4 @@
-<?php
+f<?php
 
 namespace App\Http\Controllers;
 
@@ -16,11 +16,12 @@ class SubscriptionController extends Controller
     }
 
     public function registerUserSubscription($payment_id, $plan_id, $card_id = null) {
-    	$card_id != null ? $this->_updateCard($card_id, $plan_id) : null;
-    	$res = DB::table('bill')->insert([
+    	$cid = $card_id != null ? $this->_updateCard($card_id, $plan_id) : $this->_createCard(Auth::user()->id, $plan_id);
+ 
+    	return DB::table('bill')->insert([
             'payment_id' => $payment_id,
             'users_id' => Auth::user()->id,
-            'cards_id' => $card_id == null ? $this->_createCard(Auth::user()->id, $plan_id) : $card_id,
+            'cards_id' => $cid,
             'payment_mode' => 'paypal',
             'made_at' => date('Y-m-d H:i:s'),
         ]);
@@ -37,10 +38,9 @@ class SubscriptionController extends Controller
     private function _createCard($user_id, $plan_id) {
         $card_id = CardsController::generateCardId();
         $plans = DB::table('plans')->where('id', '=', $plan_id)->get();
-
-	$today = new \DateTime();
-	$end = new \DateTime();
-	$end->modify('+1 '.$plans[0]->duration);
+        $today = new \DateTime();
+        $end = new \DateTime();
+        $end->modify('+1 '.$plans[0]->duration);
 
         DB::table('cards')->insert([
             'id' => $card_id,
@@ -49,7 +49,7 @@ class SubscriptionController extends Controller
             'subscription_end' => $end->format('Y-m-d'),
             'is_active' => true,
         ]);
-
+        
         return $card_id;
     }
 
