@@ -45,4 +45,6 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
     Route::get('/cards', 'ACardsController@getCards');
     Route::any('/cards/verify', 'ACardsController@verifyWithId');
     Route::post('/cards/search', 'ACardsController@searchForCards');
+
+    Route::get('/users', 'UsersController@getUsersList');
 });
