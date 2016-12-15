@@ -22,4 +22,21 @@ class UsersController extends Controller {
         ]);
     }
 
+    public function searchForUsers(Request $request) {
+        if($request->isMethod('post')) {
+            $value = $request->input('look_for');
+            $result = DB::table('users')
+                ->where('lastname', 'like', '%'.$value.'%')
+                ->orWhere('firstname', 'like', '%'.$value.'%')
+                ->orWhere('email', 'like', '%'.$value.'%')
+                ->get();
+
+            return view('admin.users.list', [
+                'result' => $result,
+                'searched_value' => $value,
+            ]);
+        } else {
+            throw new \Error( trans('errors.method_post') );
+        }
+    }
 }
