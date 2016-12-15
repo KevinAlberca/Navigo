@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ACardsController extends Controller
+class CardsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,10 +16,6 @@ class ACardsController extends Controller
     public function __construct()
     {
         $this->middleware('admin');
-    }
-
-    public function index() {
-        return view('admin.index');
     }
 
     public function getCards() {
