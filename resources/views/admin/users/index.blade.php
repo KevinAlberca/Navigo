@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <h1 class="text-center">Users</h1>
         @include('admin.users.search')
-        <table class="table" id="cards_list">
+        <table class="table" id="users_list">
             <thead>
                 <tr>
                     <th>ID</th>
