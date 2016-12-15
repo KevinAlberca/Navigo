@@ -57,6 +57,11 @@
                             <i class="fa fa-user-o"></i> Utilisateurs
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('/admin/bill') }}">
+                            <i class="fa fa-money"></i> Factures
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

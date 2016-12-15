@@ -23,7 +23,6 @@
                 <td>{{ $bill->made_at }}</td>
                 <td>{{ $bill->payment_id }}</td>
                 <td><a href="{{ url('/admin/bill/'.$bill->id) }}">View</a></td>
-                <td>Edit</td>
             </tr>
         @endforeach
         </tbody>

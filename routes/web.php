@@ -50,4 +50,5 @@ Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admi
     Route::post('/users/search', 'UsersController@searchForUsers');
 
     Route::get('/bill', 'BillController@viewAllBills');
+    Route::get('/bill/{bill_id}', 'BillController@viewBillWithId');
 });

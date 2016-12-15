@@ -19,4 +19,16 @@ class BillController extends Controller
             'bills' => $bill
         ]);
     }
+
+    public function viewBillWithId($bill_id) {
+        $bill = DB::table('bill')->where('id', '=', $bill_id)->first();
+        if(count($bill)){
+            $user = DB::table('users')->where('id', '=', $bill->users_id)->first();
+            return view('admin.bill.view', [
+                'user' => $user,
+                'bill' => $bill
+            ]);
+        }
+        return response()->redirectTo('/admin/bill');
+    }
 }
