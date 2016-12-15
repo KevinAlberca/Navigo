@@ -41,9 +41,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'billing'], function () {
 });
 
 Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/', function(){
-        return view('admin.index');
-    });
+    Route::get('/', 'AdminController@index');
     Route::get('/cards', 'CardsController@getCards');
     Route::any('/cards/verify', 'CardsController@verifyWithId');
     Route::post('/cards/search', 'CardsController@searchForCards');
