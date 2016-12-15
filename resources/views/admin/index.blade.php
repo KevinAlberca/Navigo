@@ -94,6 +94,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="text-right">
+                            <a href="{{ '/admin/bill' }}">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
