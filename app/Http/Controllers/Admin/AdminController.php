@@ -18,13 +18,23 @@ class AdminController extends Controller
     }
 
     public function index(){
-        $last_bill = $this->_getLastTenBill();
+        $this->_getLastTenBill();
         return view('admin.index', [
-            'last_bill' => $last_bill,
+            'last_bill' => $this->_getLastTenBill(),
+            'nb_user' => $this->_getNumberOfUsers(),
+            'nb_card' => $this->_getNumberOfCards(),
         ]);
     }
 
     private function _getLastTenBill() {
         return DB::table('bill')->orderBy('id', 'desc')->limit(10)->get();
+    }
+
+    private function _getNumberOfUsers() {
+        return DB::table('users')->count();
+    }
+
+    private function _getNumberOfCards() {
+        return DB::table('cards')->count();
     }
 }

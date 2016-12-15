@@ -26,8 +26,8 @@
                                 <i class="fa fa-id-card-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">12</div>
-                                <div>All cards</div>
+                                <div class="huge">{{ $nb_card }}</div>
+                                <div>Cards</div>
                             </div>
                         </div>
                     </div>
@@ -48,8 +48,8 @@
                                 <i class="fa fa-shopping-cart fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">124</div>
-                                <div>New Orders!</div>
+                                <div class="huge">{{ $nb_user }}</div>
+                                <div>Users</div>
                             </div>
                         </div>
                     </div>
