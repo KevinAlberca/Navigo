@@ -15,6 +15,16 @@ class CardsController extends Controller
      */
     public function checkCard(Request $request) {
         $res = DB::table('cards')->where('id', '=', $request->input('card_number'))->get();
-        return $res[0]->is_active;
+        return response()->json([
+            'is_active' => $res[0]->is_active,
+        ]);
+        
+    }
+
+    public function checkCardWithID($card_id) {
+        $res = DB::table('cards')->where('id', '=', $card_id)->get();
+        return response()->json([
+            'is_active' => $res[0]->is_active,
+        ], 200);
     }
 }
