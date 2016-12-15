@@ -179,7 +179,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Netshell\Paypal\PaypalServiceProvider::class,
-        \Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -232,7 +231,6 @@ return [
         'Paypal' => Netshell\Paypal\Facades\Paypal::class,
 
         'Security' => App\Http\Controllers\SecurityController::class,
-        'Excel' => \Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
