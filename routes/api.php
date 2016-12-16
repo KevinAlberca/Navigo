@@ -16,4 +16,5 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'API'], function () {
     Route::get('/cards/check/{card_id}', 'CardsController@checkCardWithID');
     Route::post('/cards/check', 'CardsController@checkCard');
+    Route::any('/', 'APIController@returnFunctions');
 });
