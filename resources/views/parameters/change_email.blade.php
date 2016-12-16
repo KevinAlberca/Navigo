@@ -11,6 +11,6 @@
         <label for="new_email_conf">{{ ucwords(trans('parameters.new_email_conf')) }}:</label><input type="email" name="new_email_conf" id="new_email_conf" class="form-control" required />
     </div>
     <div class="input-group">
-        <input type="submit" class="btn btn-primary" />
+        <button type="submit" class="btn btn-primary">{{ ucfirst(trans('parameters.submit'))}}</button>
     </div>
 </form>

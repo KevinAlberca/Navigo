@@ -5,5 +5,5 @@
         <label for="picture_to_upload"><h3>{{ ucfirst(trans('parameters.picture_to_upload')) }}</h3></label>
         <input type="file" name="picture_to_upload" id="picture_to_upload"/>
     </div>
-    <input type="submit" value="{{ ucfirst(trans('parameters.submit'))}}" class="btn btn-primary" />
+    <button type="submit" class="btn btn-primary">{{ ucfirst(trans('parameters.submit'))}}</button>
 </form>

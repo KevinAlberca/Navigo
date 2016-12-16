@@ -11,6 +11,6 @@
         <label for="new_password_conf">{{ ucwords(trans('parameters.new_password_conf')) }}:</label><input type="password" name="new_password_conf" id="new_password_conf" class="form-control" required />
     </div>
     <div class="input-group">
-        <input type="submit" class="btn btn-primary" />
+        <button type="submit" class="btn btn-primary">{{ ucfirst(trans('parameters.submit'))}}</button>
     </div>
 </form>
