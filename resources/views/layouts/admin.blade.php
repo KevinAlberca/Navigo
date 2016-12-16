@@ -33,7 +33,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li><a href="#"><i class="fa fa-user"></i> {{ Auth::user()->firstname.' '.Auth::user()->lastname}}</a></li>
-                <li><a href="{{ url('/') }}">Back website</a></li>
+                <li><a href="{{ url('/') }}">{{ ucfirst(trans('global.back_website')) }}</a></li>
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -42,24 +42,24 @@
                         <a href="{{ url('/admin') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#" data-toggle="collapse" data-target="#cards_dropdown"><i class="fa fa-id-card-o"></i> Cards <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="#" data-toggle="collapse" data-target="#cards_dropdown"><i class="fa fa-id-card-o"></i> {{ ucfirst(trans('cards.cards')) }} <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="cards_dropdown" class="collapse">
                             <li>
-                                <a href="{{ url('/admin/cards') }}">Liste</a>
+                                <a href="{{ url('/admin/cards') }}">{{ ucfirst(trans('global.list')) }}</a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/cards/verify') }}">Verifier avec un numero</a>
+                                <a href="{{ url('/admin/cards/verify') }}">{{ ucfirst(trans('cards.verify_with_key')) }}</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="{{ url('/admin/users') }}">
-                            <i class="fa fa-user-o"></i> Utilisateurs
+                            <i class="fa fa-user-o"></i> {{ ucfirst(trans('users.users')) }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('/admin/bill') }}">
-                            <i class="fa fa-money"></i> Factures
+                            <i class="fa fa-money"></i> {{ ucfirst(trans('bill.bill')) }}
                         </a>
                     </li>
                 </ul>
