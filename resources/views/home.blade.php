@@ -15,7 +15,7 @@
             @else
                 @foreach($card as $c)
                     <div class="col-xs-12 col-sm-4">
-                        <div class="panel {{ $c->is_active ? 'panel-green' : 'panel-danger' }}">
+                        <div class="panel {{ $c->is_active ? 'panel-primary' : 'panel-danger' }}">
                             <div class="panel-heading">
                                 <h3 class="panel-title text-center">{{ $c->id }}</h3>
                             </div>
